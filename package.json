@@ -46,7 +46,8 @@
     "react-native-screens": "~4.11.1",
     "react-native-web": "~0.20.0",
     "react-native-webview": "13.13.5",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "zod": "^4.0.10"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -105,10 +106,18 @@
       }
     },
     "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/$1",
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "identity-obj-proxy"
     },
     "transform": {
-      "^.+\\.(js|ts|tsx)$": ["babel-jest", { "presets": ["@babel/preset-typescript"] }]
+      "^.+\\.(js|ts|tsx)$": [
+        "babel-jest",
+        {
+          "presets": [
+            "@babel/preset-typescript"
+          ]
+        }
+      ]
     },
     "transformIgnorePatterns": [
       "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|uuid|@supabase/.*)"
