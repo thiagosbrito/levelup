@@ -54,6 +54,63 @@ jest.mock('react-native-safe-area-context', () => ({
   useSafeAreaInsets: () => ({ top: 0, right: 0, bottom: 0, left: 0 }),
 }));
 
+// Mock AsyncStorage
+jest.mock('@react-native-async-storage/async-storage', () => ({
+  default: {
+    getItem: jest.fn(() => Promise.resolve(null)),
+    setItem: jest.fn(() => Promise.resolve()),
+    removeItem: jest.fn(() => Promise.resolve()),
+    clear: jest.fn(() => Promise.resolve()),
+  },
+}));
+
+// Mock UUID
+jest.mock('uuid', () => ({
+  v4: jest.fn(() => 'test-uuid-12345678-1234-1234-1234-123456789abc'),
+}));
+
+// Mock Supabase
+jest.mock('@supabase/supabase-js', () => ({
+  createClient: jest.fn(() => ({
+    from: jest.fn(() => ({
+      select: jest.fn(() => ({
+        eq: jest.fn(() => ({
+          single: jest.fn(() => Promise.resolve({ data: null, error: null })),
+          order: jest.fn(() => Promise.resolve({ data: [], error: null })),
+          limit: jest.fn(() => Promise.resolve({ data: [], error: null })),
+        })),
+        order: jest.fn(() => Promise.resolve({ data: [], error: null })),
+        limit: jest.fn(() => Promise.resolve({ data: [], error: null })),
+      })),
+      insert: jest.fn(() => ({
+        select: jest.fn(() => ({
+          single: jest.fn(() => Promise.resolve({ data: {}, error: null })),
+        })),
+      })),
+      update: jest.fn(() => ({
+        eq: jest.fn(() => ({
+          select: jest.fn(() => ({
+            single: jest.fn(() => Promise.resolve({ data: {}, error: null })),
+          })),
+        })),
+      })),
+    })),
+    auth: {
+      getSession: jest.fn(() => Promise.resolve({ data: { session: null }, error: null })),
+      onAuthStateChange: jest.fn(() => ({
+        data: { subscription: { unsubscribe: jest.fn() } }
+      })),
+      signOut: jest.fn(() => Promise.resolve({ error: null })),
+    },
+    channel: jest.fn(() => ({
+      on: jest.fn(() => ({
+        subscribe: jest.fn(),
+      })),
+    })),
+    rpc: jest.fn(() => Promise.resolve({ data: null, error: null })),
+  })),
+}));
+
 // Silence the warning about act() for testing
 global.console = {
   ...console,

@@ -22,6 +22,8 @@
     "@react-navigation/bottom-tabs": "^7.3.10",
     "@react-navigation/elements": "^2.3.8",
     "@react-navigation/native": "^7.1.6",
+    "@supabase/supabase-js": "^2.52.1",
+    "@types/uuid": "^10.0.0",
     "expo": "~53.0.20",
     "expo-blur": "~14.1.5",
     "expo-constants": "~17.1.7",
@@ -43,7 +45,8 @@
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "~4.11.1",
     "react-native-web": "~0.20.0",
-    "react-native-webview": "13.13.5"
+    "react-native-webview": "13.13.5",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -87,6 +90,8 @@
       "components/**/*.{ts,tsx}",
       "utils/**/*.{ts,tsx}",
       "hooks/**/*.{ts,tsx}",
+      "services/**/*.{ts,tsx}",
+      "types/**/*.{ts,tsx}",
       "!**/*.d.ts",
       "!**/node_modules/**",
       "!**/.expo/**"
@@ -101,7 +106,13 @@
     },
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "identity-obj-proxy"
-    }
+    },
+    "transform": {
+      "^.+\\.(js|ts|tsx)$": ["babel-jest", { "presets": ["@babel/preset-typescript"] }]
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|uuid|@supabase/.*)"
+    ]
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
