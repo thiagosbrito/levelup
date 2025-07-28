@@ -313,3 +313,11 @@ export type EventType = FamilyEvent['event_type'];
 export type MessageType = FamilyMessage['message_type'];
 export type NotificationType = UserNotification['notification_type'];
 export type AgeGroup = UserProfile['age_group'];
+
+// Authentication and Session Types
+export interface SessionData {
+  user: UserProfile | null;
+  session: any; // Supabase session object
+  family: Family | null;
+  familyRole: 'parent' | 'child' | 'teen' | null;
+}
