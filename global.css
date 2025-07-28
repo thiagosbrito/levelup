@@ -1,0 +1,46 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* Custom component classes based on design system */
+@layer components {
+  .btn-primary {
+    @apply bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-xl px-8 py-4 text-base font-semibold shadow-button;
+  }
+  
+  .btn-secondary {
+    @apply bg-gradient-to-br from-secondary-500 to-secondary-600 text-white rounded-xl px-8 py-4 text-base font-semibold;
+  }
+  
+  .btn-ghost {
+    @apply bg-white/90 text-neutral-700 border border-neutral-300/50 rounded-lg px-6 py-3 text-sm font-medium;
+  }
+  
+  .card-default {
+    @apply bg-white rounded-xl p-5 shadow-card border border-neutral-200/50;
+  }
+  
+  .card-elevated {
+    @apply bg-white rounded-2xl p-6 shadow-lg;
+  }
+  
+  .card-interactive {
+    @apply bg-white rounded-lg p-4 shadow-sm active:scale-95 transition-transform;
+  }
+  
+  .input-default {
+    @apply bg-white border-2 border-neutral-200 rounded-xl px-4 py-3.5 text-base text-neutral-700 focus:border-primary-500;
+  }
+  
+  .badge-achievement {
+    @apply bg-gradient-to-br from-warning-500 to-warning-600 text-white rounded-xl px-3 py-1.5 text-xs font-semibold;
+  }
+  
+  .progress-bar {
+    @apply h-2 bg-neutral-200 rounded-sm overflow-hidden;
+  }
+  
+  .progress-fill {
+    @apply h-full bg-gradient-to-r from-primary-500 to-primary-600 rounded-sm;
+  }
+}

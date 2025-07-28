@@ -38,3 +38,9 @@ yarn-error.*
 *.tsbuildinfo
 
 app-example
+
+# Claude and MCP secrets
+.claude/mcps/mcp-atlassian.json
+.claude/session-notes-*.md
+.mcp.json
+supabase/.temp/
