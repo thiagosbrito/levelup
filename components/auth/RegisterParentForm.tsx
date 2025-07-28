@@ -9,6 +9,7 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
+import { router } from 'expo-router';
 import { useAuth } from '../../hooks/useAuth';
 import { parentRegistrationSchema } from '../../utils/validation/schemas';
 import { ThemedText } from '../ThemedText';
@@ -81,8 +82,8 @@ export const RegisterParentForm: React.FC<RegisterParentFormProps> = ({
       return true;
     } catch (error: any) {
       const validationErrors: Record<string, string> = {};
-      if (error.errors) {
-        error.errors.forEach((err: any) => {
+      if (error.issues) {
+        error.issues.forEach((err: any) => {
           validationErrors[err.path[0]] = err.message;
         });
       }
@@ -101,11 +102,8 @@ export const RegisterParentForm: React.FC<RegisterParentFormProps> = ({
       const response = await registerParent(formData);
       
       if (response.success) {
-        Alert.alert(
-          'Registration Successful',
-          'Please check your email to verify your account before proceeding.',
-          [{ text: 'OK', onPress: onSuccess }]
-        );
+        // Redirect to confirm-email route for deep linking support
+        router.push('/(auth)/confirm-email');
       } else {
         Alert.alert('Registration Failed', response.error || 'An error occurred during registration');
       }

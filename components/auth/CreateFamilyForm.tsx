@@ -45,8 +45,8 @@ export const CreateFamilyForm: React.FC<CreateFamilyFormProps> = ({
       return true;
     } catch (error: any) {
       const validationErrors: Record<string, string> = {};
-      if (error.errors) {
-        error.errors.forEach((err: any) => {
+      if (error.issues) {
+        error.issues.forEach((err: any) => {
           validationErrors[err.path[0]] = err.message;
         });
       }
@@ -92,6 +92,7 @@ export const CreateFamilyForm: React.FC<CreateFamilyFormProps> = ({
       <View style={styles.inputContainer}>
         <ThemedText style={styles.label}>Family Name *</ThemedText>
         <TextInput
+          testID="family-name-input"
           style={[styles.input, errors.familyName && styles.inputError]}
           value={formData.familyName}
           onChangeText={(value) => updateField('familyName', value)}
@@ -107,6 +108,7 @@ export const CreateFamilyForm: React.FC<CreateFamilyFormProps> = ({
       <View style={styles.inputContainer}>
         <ThemedText style={styles.label}>Family Description (Optional)</ThemedText>
         <TextInput
+          testID="family-description-input"
           style={[styles.input, styles.textArea, errors.familyDescription && styles.inputError]}
           value={formData.familyDescription}
           onChangeText={(value) => updateField('familyDescription', value)}
@@ -132,6 +134,7 @@ export const CreateFamilyForm: React.FC<CreateFamilyFormProps> = ({
       </View>
 
       <TouchableOpacity
+        testID="create-family-button"
         style={[styles.createButton, isLoading && styles.createButtonDisabled]}
         onPress={handleCreateFamily}
         disabled={isLoading}

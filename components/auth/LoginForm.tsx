@@ -37,8 +37,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({
       return true;
     } catch (error: any) {
       const validationErrors: Record<string, string> = {};
-      if (error.errors) {
-        error.errors.forEach((err: any) => {
+      if (error.issues) {
+        error.issues.forEach((err: any) => {
           validationErrors[err.path[0]] = err.message;
         });
       }
@@ -73,6 +73,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
       <View style={styles.inputContainer}>
         <ThemedText style={styles.label}>Email</ThemedText>
         <TextInput
+          testID="email-input"
           style={[styles.input, errors.email && styles.inputError]}
           value={email}
           onChangeText={setEmail}
@@ -90,6 +91,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
       <View style={styles.inputContainer}>
         <ThemedText style={styles.label}>Password</ThemedText>
         <TextInput
+          testID="password-input"
           style={[styles.input, errors.password && styles.inputError]}
           value={password}
           onChangeText={setPassword}
@@ -105,6 +107,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
       </View>
 
       <TouchableOpacity
+        testID="forgot-password-button"
         style={styles.forgotPasswordButton}
         onPress={onSwitchToForgotPassword}
         disabled={isLoading}
@@ -115,6 +118,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
       </TouchableOpacity>
 
       <TouchableOpacity
+        testID="login-button"
         style={[styles.loginButton, isLoading && styles.loginButtonDisabled]}
         onPress={handleLogin}
         disabled={isLoading}

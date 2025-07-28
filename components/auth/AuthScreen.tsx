@@ -8,12 +8,11 @@ import {
 } from 'react-native';
 import { ThemedText } from '../ThemedText';
 import { ThemedView } from '../ThemedView';
-import { CreateFamilyForm } from './CreateFamilyForm';
 import { ForgotPasswordForm } from './ForgotPasswordForm';
 import { LoginForm } from './LoginForm';
 import { RegisterParentForm } from './RegisterParentForm';
 
-export type AuthMode = 'login' | 'register' | 'forgot-password' | 'create-family';
+export type AuthMode = 'login' | 'register' | 'forgot-password';
 
 interface AuthScreenProps {
   initialMode?: AuthMode;
@@ -40,7 +39,6 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
         return (
           <RegisterParentForm
             onSwitchToLogin={() => setCurrentMode('login')}
-            onSuccess={() => setCurrentMode('create-family')}
           />
         );
       case 'forgot-password':
@@ -48,12 +46,6 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
           <ForgotPasswordForm
             onSwitchToLogin={() => setCurrentMode('login')}
             onSuccess={() => setCurrentMode('login')}
-          />
-        );
-      case 'create-family':
-        return (
-          <CreateFamilyForm
-            onSuccess={onAuthSuccess}
           />
         );
       default:
@@ -69,8 +61,6 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
         return 'Create Parent Account';
       case 'forgot-password':
         return 'Reset Password';
-      case 'create-family':
-        return 'Create Your Family';
       default:
         return 'Authentication';
     }
@@ -84,8 +74,6 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
         return 'Join LevelUp to start organizing your family';
       case 'forgot-password':
         return 'Enter your email to receive a password reset link';
-      case 'create-family':
-        return 'Set up your family space and invite members';
       default:
         return '';
     }

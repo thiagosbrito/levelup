@@ -44,7 +44,6 @@ export class AuthService {
    */
   async registerParent(data: ParentRegistrationData): Promise<AuthResponse<UserProfile>> {
     try {
-      // 1. Create auth user
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: data.email,
         password: data.password,
@@ -53,6 +52,7 @@ export class AuthService {
             display_name: data.displayName,
             age_group: 'adult',
           },
+          emailRedirectTo: 'exp://localhost:8081/--/(auth)/auth-callback',
         },
       });
 
@@ -72,27 +72,8 @@ export class AuthService {
         };
       }
 
-      // 2. The user profile will be created automatically by the database trigger
-      // Wait a moment for the trigger to complete
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      // 3. Get the created user profile
-      const { data: profile, error: profileError } = await supabase
-        .from('user_profiles')
-        .select('*')
-        .eq('id', authData.user.id)
-        .single();
-
-      if (profileError || !profile) {
-        return {
-          data: null,
-          error: 'Failed to create user profile',
-          success: false,
-        };
-      }
-
       return {
-        data: profile,
+        data: authData.user,
         error: null,
         success: true,
       };

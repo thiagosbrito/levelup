@@ -2,6 +2,7 @@
 
 # dependencies
 node_modules/
+.gitignore
 
 # Expo
 .expo/
@@ -17,6 +18,8 @@ expo-env.d.ts
 *.p12
 *.key
 *.mobileprovision
+
+coverage/
 
 # Metro
 .metro-health-check*
@@ -38,3 +41,10 @@ yarn-error.*
 *.tsbuildinfo
 
 app-example
+
+supabase/.temp
+
+# MCP and Claude configuration files with secrets
+.claude/mcps/
+.mcp.json
+.claude/session-notes-*.md

@@ -122,6 +122,34 @@ jest.mock('./services/supabase', () => ({
   supabase: mockSupabaseClient,
 }));
 
+// Mock auth service
+jest.mock('./services/auth/authService', () => ({
+  AuthService: jest.fn(),
+  authService: {
+    registerParent: jest.fn(() => Promise.resolve({ success: true, data: null, error: null })),
+    signIn: jest.fn(() => Promise.resolve({ success: true, data: null, error: null })),
+    signOut: jest.fn(() => Promise.resolve({ success: true, data: null, error: null })),
+    resetPassword: jest.fn(() => Promise.resolve({ success: true, data: null, error: null })),
+    updatePassword: jest.fn(() => Promise.resolve({ success: true, data: null, error: null })),
+    getCurrentSession: jest.fn(() => Promise.resolve({ 
+      success: true, 
+      data: { user: null, session: null, family: null, familyRole: null }, 
+      error: null 
+    })),
+    createFamily: jest.fn(() => Promise.resolve({ success: true, data: null, error: null })),
+    onAuthStateChange: jest.fn(() => ({ data: { subscription: { unsubscribe: jest.fn() } } })),
+  },
+}));
+
+// Global mocks for React Native components used in tests
+global.Alert = {
+  alert: jest.fn(),
+};
+
+global.Linking = {
+  openURL: jest.fn(),
+};
+
 // Silence the warning about act() for testing
 global.console = {
   ...console,
